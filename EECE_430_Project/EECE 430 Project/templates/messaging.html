@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Messaging</title>
+    <style>
+        body {
+            background: #eee;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        * {
+            box-sizing: inherit;
+        }
+
+        .container {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .message-history {
+            margin-bottom: 20px;
+        }
+
+        .embed-submit-field {
+            display: flex;
+        }
+
+        .embed-submit-field input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .embed-submit-field button {
+            background-color: #37C88D;
+            color: #fff;
+            border: none;
+            width: 25%;
+            border-radius: 0 3px 3px 0;
+            padding: 15px; /* Reverted to original button padding */
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .embed-submit-field button:hover {
+            background-color: #2e9e78;
+        }
+
+        .message {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .message .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin-right: 10px;
+        }
+
+        .message .content {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .message .metadata {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body style="background-image: url('static/background.jpg'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed;">
+    <div class="container">
+        <h2 class="message-history">Message History</h2>
+        <div>
+            {% for message in messages %}
+            <div class="message">
+                <div class="avatar"></div>
+                <div class="content">
+                    <div class="metadata">{{ message[0] }} [{{ message[2] }}]</div>
+                    <p>{{ message[1] }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <form method="post" action="{{ url_for('messaging') }}">
+            <div class="embed-submit-field">
+                <input type="text" name="message_text" required placeholder="Message">
+                <button type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

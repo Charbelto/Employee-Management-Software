@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <title>Manager Dashboard</title>
+</head>
+<body>
+<body style="background-image: url('static/background.jpg'); background-repeat: no-repeat;background-size: cover; background-attachment: fixed;">
+    <!-- Manager Dashboard Title and Dropdown Menu -->
+    <div>
+        <h1>Manager Dashboard</h1>
+        <select onchange="location = this.value;">
+            <option value="" disabled selected>Choose an action</option>
+            <option value="{{ url_for('add_employee') }}">Add Employee</option>
+            <option value="{{ url_for('assign_task') }}">Assign Task</option>
+            <option value="{{ url_for('schedule_meeting') }}">Schedule Meeting</option>
+            <option value="{{ url_for('view_attendance') }}">View Attendance</option>
+            <option value="{{ url_for('create_announcement') }}">Create Announcement</option>
+            <option value="{{ url_for('view_announcements') }}">View Previous Announcements</option>
+            <option value="{{ url_for('messaging') }}">Send and Receive Messages</option>
+            <option value="{{ url_for('submit_feedback') }}">Submit Feedback</option>
+            <option value="{{ url_for('view_pdf_documents') }}">View Employee Documents</option>
+            <option value="{{ url_for('view_calendar') }}">View Calendar</option>
+            <option value="{{ url_for('delete_employee') }}">Delete Employee Profile</option>
+            <option value="{{ url_for('task_statistics') }}">Create courses</option>
+            <option value="{{ url_for('logout') }}">Logout</option>
+        </select>
+    </div>
+
+    <!-- Buttons Section -->
+    <div class="action-button-container">
+        <button class="button-85" role="button" onclick="location.href='{{ url_for('add_employee') }}'">Add Employee</button>
+        <button class="button-85" role="button" onclick="location.href='{{ url_for('assign_task') }}'">Assign Task</button>
+        <button class="button-85" role="button" onclick="location.href='{{ url_for('schedule_meeting') }}'">Schedule Meeting</button>
+        <button class="button-85" role="button" onclick="location.href='{{ url_for('view_attendance') }}'">View Attendance</button>
+        <button class="button-85" role="button" onclick="location.href='{{ url_for('create_announcement') }}'">Create Announcement</button>
+        <button class="button-85" role="button" onclick="location.href='{{ url_for('view_announcements') }}'">View Previous Announcements</button>
+        <button class="button-85" role="button" onclick="location.href='{{ url_for('messaging') }}'">Send and Receive Messages</button>
+        <button class="button-85" role="button" onclick="location.href='{{ url_for('submit_feedback') }}'">Submit Feedback</button>
+        <button class="button-85" role="button" onclick="location.href='{{ url_for('view_pdf_documents') }}'">View Employee Documents</button>
+        <button class="button-85" role="button" onclick="location.href='{{ url_for('view_calendar') }}'">View Calendar</button>
+        <button class="button-85" role="button" onclick="location.href='{{ url_for('delete_employee') }}'">Delete Employee Profile</button>
+        <button class="button-85" role="button" onclick="location.href='{{ url_for('task_statistics') }}'">View Statistics</button>
+        <button class="button-85" role="button" onclick="location.href='{{ url_for('logout') }}'">Logout</button>
+    </div>
+
+</body>
+</html>

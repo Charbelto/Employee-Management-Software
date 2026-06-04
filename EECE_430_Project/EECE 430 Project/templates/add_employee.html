@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>Add Employee</title>
+</head>
+<body>
+  <body style="background-image: url('static/background.jpg'); background-repeat: no-repeat;background-size: cover; background-attachment: fixed;">
+    <h2>Add Employee</h2>
+    <form id="add-employee-form" method="POST" action="{{ url_for('add_employee') }}">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required><br><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br><br>
+      <label for="department">Department:</label>
+      <input type="text" id="department" name="department" required><br><br>
+      <button type="submit">Add Employee</button>
+    </form>
+
+    <div id="success-popup" style="display: none;">
+      <h2>Success</h2>
+      <p>Employee added successfully!</p>
+      <button id="close-success-popup">Close</button>
+    </div>
+
+    <div id="username-popup" style="display: none;">
+      <h2>Error</h2>
+      <p id="popup-message"></p>
+      <button id="close-popup">Close</button>
+    </div>
+
+    <script>
+      $(document).ready(function() {
+        $("#add-employee-form").submit(function(event) {
+          event.preventDefault(); // Prevent default form submission
+
+          $.ajax({
+            url: "/add_employee",
+            type: "POST",
+            data: $(this).serialize(),
+            success: function(data) {
+              // Check if there is an error message
+              if (data.message) {
+                // Display the error popup
+                $("#popup-message").text(data.message);
+                $("#username-popup").show();
+              } else {
+                // Display the success popup
+                $("#success-popup").show();
+              }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              alert("Error adding employee: " + textStatus + errorThrown);
+            }
+          });
+        });
+
+        $("#close-popup").click(function() {
+          $("#username-popup").hide();
+        });
+
+        $("#close-success-popup").click(function() {
+          $("#success-popup").hide();
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <title>Delete Employee Profile</title>
+</head>
+<body>
+    <body style="background-image: url('static/background.jpg'); background-repeat: no-repeat;background-size: cover; background-attachment: fixed;"></body>
+    <h2>Delete Employee Profile</h2>
+    <form action="{{ url_for('delete_employee') }}" method="post">
+        <label for="employee_username">Select Employee Username:</label>
+        <select id="employee_username" name="employee_username" required>
+            {% for employee in employees %}
+            <option value="{{ employee[0] }}">{{ employee[0] }}</option>
+            {% endfor %}
+        </select>
+        <button class="button-85" role="button" type="submit">Delete</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <script>
+                alert("{{ messages[0] }}");
+            </script>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
